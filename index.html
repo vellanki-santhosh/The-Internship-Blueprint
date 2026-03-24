@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The B.Tech Internship Blueprint</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0b;
+    --cream: #f5f0e8;
+    --gold: #c9922a;
+    --gold-light: #f0d08a;
+    --rust: #b84c2b;
+    --teal: #1a5c5a;
+    --teal-light: #e8f3f2;
+    --mid: #6b6459;
+    --border: #d8d0c4;
+    --white: #fdfcfa;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+  font-size: 0.9375rem;
+    line-height: 1.65;
+  }
+
+  /* ─── HERO ─── */
+.hero {
+    background: var(--ink);
+    color: var(--cream);
+  padding: 3rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+.hero::before {
+    content: '';
+    position: absolute;
+    top: clamp(-2rem, -8vw, -5rem); right: clamp(-2rem, -8vw, -5rem);
+    width: clamp(12rem, 35vw, 24rem); height: clamp(12rem, 35vw, 24rem);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,146,42,0.18) 0%, transparent 70%);
+  }
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: clamp(-2rem, -6vw, -3.75rem); left: clamp(-2rem, -6vw, -3.75rem);
+    width: clamp(10rem, 30vw, 18rem); height: clamp(10rem, 30vw, 18rem);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,92,90,0.22) 0%, transparent 70%);
+  }
+  .hero-inner {
+    max-width: 820px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 1.125rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 28px; height: 1px;
+    background: var(--gold);
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 10vw, 4.25rem);
+    font-weight: 900;
+    line-height: 1.08;
+    margin-bottom: 1rem;
+    letter-spacing: -1px;
+  }
+  .hero h1 span { color: var(--gold-light); }
+  .hero-sub {
+    font-size: clamp(1rem, 3.4vw, 1.125rem);
+    color: #c2bcb2;
+    max-width: 560px;
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
+  }
+.hero-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  @media (min-width: 40rem) {
+    .hero-stats {
+      flex-direction: row;
+      gap: 1.75rem;
+    }
+  }
+  .stat {
+    border-left: 2px solid var(--gold);
+    padding-left: 14px;
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 5vw, 1.75rem);
+    font-weight: 700;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.6875rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #9a9590;
+    margin-top: 3px;
+  }
+
+  /* ─── LAYOUT ─── */
+.container {
+    max-width: 90rem;
+    margin: 0 auto;
+  width: 100%;
+  padding: 0 1rem;
+  }
+
+  /* ─── TOC ─── */
+  .toc-wrap {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin: 2rem 1rem;
+    max-width: 820px;
+    overflow: hidden;
+  }
+  @media (min-width: 56rem) {
+    .toc-wrap { margin-left: auto; margin-right: auto; }
+  }
+  .toc-header {
+    background: var(--ink);
+    color: var(--gold-light);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 0.875rem 1rem;
+  }
+  .toc-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  @media (min-width: 36rem) {
+    .toc-grid { grid-template-columns: 1fr 1fr; }
+  }
+  .toc-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 2.75rem;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.15s;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .toc-item { opacity: 0; animation: fadeInUp 0.6s ease-out forwards; }
+  .toc-item:nth-child(1) { animation-delay: 0.2s; }
+  .toc-item:nth-child(2) { animation-delay: 0.25s; }
+  .toc-item:nth-child(3) { animation-delay: 0.3s; }
+  .toc-item:nth-child(4) { animation-delay: 0.35s; }
+  .toc-item:nth-child(5) { animation-delay: 0.4s; }
+  .toc-item:nth-child(6) { animation-delay: 0.45s; }
+  .toc-item:nth-child(7) { animation-delay: 0.5s; }
+  .toc-item:nth-child(8) { animation-delay: 0.55s; }
+  .toc-item:nth-child(9) { animation-delay: 0.6s; }
+  .toc-item:hover { background: var(--teal-light); }
+
+  .toc-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6875rem;
+    color: var(--gold);
+    font-weight: 500;
+    min-width: 22px;
+  }
+  .toc-text { font-size: clamp(0.875rem, 2.5vw, 0.9375rem); font-weight: 500; }
+
+  /* ─── SECTIONS ─── */
+  .section {
+    max-width: 820px;
+    margin: 0 auto clamp(2.5rem, 8vw, 3.5rem);
+    padding: 0 1rem;
+  }
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1.5px solid var(--border);
+  }
+  .section-num {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 8vw, 3.25rem);
+    font-weight: 900;
+    color: var(--border);
+    line-height: 1;
+    min-width: 56px;
+    margin-top: -6px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 3.5vw, 30px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .section-subtitle {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 6px;
+  }
+
+  /* ─── CARDS ─── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+  @media (min-width: 48rem) {
+    .card-grid {
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+  }
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 20px;
+    position: relative;
+  }
+  .card-icon {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  .card h4 {
+    font-size: clamp(0.875rem, 2.5vw, 0.9375rem);
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+  .card p {
+    font-size: clamp(0.8125rem, 2.4vw, 0.875rem);
+    color: var(--mid);
+    line-height: 1.55;
+  }
+  .card.accent {
+    border-left: 3px solid var(--gold);
+  }
+  .card.teal {
+    border-left: 3px solid var(--teal);
+    background: var(--teal-light);
+  }
+
+  /* ─── STEPS ─── */
+  .steps { display: flex; flex-direction: column; gap: 14px; margin: 20px 0; }
+  .step {
+    display: flex;
+    gap: 16px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 18px 20px;
+    border-radius: 4px;
+    align-items: flex-start;
+  }
+  .step-badge {
+    background: var(--ink);
+    color: var(--gold-light);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 9px;
+    border-radius: 2px;
+    white-space: nowrap;
+    margin-top: 2px;
+  }
+  .step-content h4 {
+    font-size: clamp(0.9375rem, 2.8vw, 1rem);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .step-content p {
+    font-size: clamp(0.84375rem, 2.4vw, 0.875rem);
+    color: var(--mid);
+    line-height: 1.6;
+  }
+
+  /* ─── CHECKLIST ─── */
+  .checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 16px 0;
+  }
+  .checklist li {
+    display: flex;
+    gap: 12px;
+    font-size: clamp(0.875rem, 2.6vw, 0.9375rem);
+    align-items: flex-start;
+    line-height: 1.55;
+  }
+  .checklist li::before {
+    content: '✓';
+    color: var(--teal);
+    font-weight: 700;
+    font-size: 13px;
+    min-width: 18px;
+    margin-top: 2px;
+  }
+
+  /* ─── HIGHLIGHT BOX ─── */
+  .highlight {
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: 4px;
+    padding: 1.5rem;
+    margin: 24px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .highlight::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 120px;
+    color: rgba(201,146,42,0.15);
+    position: absolute;
+    top: -20px; left: 16px;
+    line-height: 1;
+  }
+  .highlight p {
+    font-size: clamp(1rem, 3vw, 1.0625rem);
+    line-height: 1.65;
+    font-style: italic;
+    position: relative;
+    z-index: 1;
+  }
+  .highlight .source {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--gold-light);
+    margin-top: 10px;
+    font-style: normal;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── TABLE ─── */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 20px 0;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: clamp(0.8125rem, 2.3vw, 0.875rem);
+  }
+  thead tr {
+    background: var(--ink);
+    color: var(--gold-light);
+  }
+  thead th {
+    padding: 12px 16px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-align: left;
+  }
+  tbody tr { border-bottom: 1px solid var(--border); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:nth-child(even) { background: #f8f4ee; }
+  tbody td { padding: 11px 16px; color: var(--ink); vertical-align: top; }
+  td.tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--teal);
+    font-weight: 500;
+  }
+
+  /* ─── PILL ROW ─── */
+  .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+  .pill {
+    background: var(--teal-light);
+    color: var(--teal);
+    border: 1px solid #b4d4d2;
+    font-family: 'DM Mono', monospace;
+    font-size: 11.5px;
+    padding: 5px 12px;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+  .pill.gold {
+    background: #fdf4e0;
+    color: #8a5e10;
+    border-color: #e4c87a;
+  }
+
+  /* ─── WARNING / TIP BOX ─── */
+  .tip-box {
+    display: flex;
+    gap: 14px;
+    padding: 18px 20px;
+    border-radius: 4px;
+    margin: 20px 0;
+    font-size: clamp(0.875rem, 2.5vw, 0.9375rem);
+    line-height: 1.6;
+    align-items: flex-start;
+  }
+  .tip-box.tip {
+    background: var(--teal-light);
+    border-left: 3px solid var(--teal);
+  }
+  .tip-box.warn {
+    background: #fdf4e0;
+    border-left: 3px solid var(--gold);
+  }
+  .tip-box .icon { font-size: 18px; min-width: 22px; }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    max-width: 820px;
+    margin: 0 auto 48px;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .divider-dot {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+
+  /* ─── TIMELINE ─── */
+  .timeline { display: flex; flex-direction: column; gap: 0; margin: 20px 0; position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0.8125rem; top: 0; bottom: 0;
+    width: 1.5px;
+    background: var(--border);
+    z-index: 0;
+  }
+  .tl-item {
+    display: flex;
+    gap: 0.875rem;
+    padding: 0 0 1rem 0;
+    position: relative;
+    z-index: 1;
+  }
+  .tl-dot {
+    min-width: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .tl-circle {
+    width: 0.75rem; height: 0.75rem;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--cream);
+    box-shadow: 0 0 0 1px var(--gold);
+    margin-top: 3px;
+  }
+  @media (min-width: 40rem) {
+    .timeline::before { left: 1.25rem; }
+    .tl-item { gap: 1.25rem; padding-bottom: 1.5rem; }
+    .tl-dot { min-width: 2.625rem; }
+    .tl-circle {
+      width: 1.125rem;
+      height: 1.125rem;
+      border-width: 3px;
+      box-shadow: 0 0 0 1.5px var(--gold);
+    }
+  }
+  .tl-body {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 16px 20px;
+    border-radius: 4px;
+    flex: 1;
+  }
+  .tl-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .tl-body h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+  .tl-body p { font-size: 13.5px; color: var(--mid); line-height: 1.6; }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    background: var(--ink);
+    color: #888;
+    text-align: center;
+    padding: 2rem 1rem;
+    font-size: 0.8125rem;
+    margin-top: 48px;
+  }
+  .footer strong { color: var(--gold-light); }
+  .footer p { margin-top: 6px; line-height: 1.7; }
+
+  /* ─── PROSE ─── */
+  .prose { font-size: clamp(0.9375rem, 2.7vw, 1rem); color: #3a3630; line-height: 1.75; margin-bottom: 20px; }
+  .prose strong { color: var(--ink); font-weight: 600; }
+
+  /* ─── 2-COL ─── */
+  .two-col { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 20px 0; }
+  @media (min-width: 36rem) { .two-col { grid-template-columns: 1fr 1fr; } }
+
+  @media (min-width: 48rem) {
+    .section,
+    .divider { padding: 0 2rem; }
+    .highlight { padding: 1.75rem 2rem; }
+    .toc-header,
+    .toc-item { padding-left: 1.5rem; padding-right: 1.5rem; }
+  }
+
+  @media (min-width: 64rem) {
+    .hero { padding: 3.5rem clamp(1.5rem, 4vw, 2.5rem); }
+    .container { padding: 0 2rem; }
+  }
+
+  /* print-friendly */
+  @media print {
+    .hero { padding: 40px 24px; }
+    .section-num { font-size: 36px; }
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(201, 146, 42, 0.4); }
+    50% { box-shadow: 0 0 20px 0 rgba(201, 146, 42, 0.6); }
+  }
+
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform, opacity;
+  }
+
+  .animate-on-scroll.animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .stagger-1 { animation: fadeInUp 0.8s ease-out 0.1s both; }
+  .stagger-2 { animation: fadeInUp 0.8s ease-out 0.2s both; }
+  .stagger-3 { animation: fadeInUp 0.8s ease-out 0.3s both; }
+  .stagger-4 { animation: fadeInUp 0.8s ease-out 0.4s both; }
+  .stagger-5 { animation: fadeInUp 0.8s ease-out 0.5s both; }
+
+  /* Hero specific */
+  .hero h1 { animation: slideInLeft 1s ease-out 0.3s both; }
+  .hero-sub { animation: fadeInUp 0.8s ease-out 0.6s both; }
+  .stat { animation: fadeInUp 0.6s ease-out both; }
+  .stat:nth-child(1) { animation-delay: 0.8s; }
+  .stat:nth-child(2) { animation-delay: 0.9s; }
+  .stat:nth-child(3) { animation-delay: 1s; }
+
+  /* Hover effects */
+  .toc-item,
+  .card,
+  .step,
+  .tl-body {
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .toc-item:hover { 
+    background: var(--teal-light);
+    transform: translateX(8px);
+    box-shadow: 4px 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .card:hover,
+  .step:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+  }
+
+  .highlight:hover::before {
+    animation: pulseGlow 2s infinite;
+  }
+
+  /* Responsive animation adjustments */
+  @media (max-width: 48rem) {
+    .animate-on-scroll {
+      transform: translateY(20px);
+      transition-duration: 0.4s;
+    }
+    .toc-item:hover { transform: translateX(4px); }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ═══════════ HERO ═══════════ -->
+<div class="hero">
+  <div class="hero-inner animate-on-scroll">
+
+    <div class="hero-tag">Mission Placement Community · B.Tech Student Guide</div>
+    <h1>The <span>Internship</span><br>Blueprint</h1>
+    <p class="hero-sub">A comprehensive, step-by-step playbook to help every B.Tech student — regardless of year or skill level — land a genuine, career-building internship.</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">9</div>
+        <div class="stat-label">Core Steps</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Actionable</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">All Years</div>
+        <div class="stat-label">Applicable</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ TABLE OF CONTENTS ═══════════ -->
+<div class="toc-wrap">
+  <div class="toc-header">📋 &nbsp;Table of Contents</div>
+  <div class="toc-grid">
+    <a class="toc-item" href="#s1"><span class="toc-num">01</span><span class="toc-text">Understand What Employers Want</span></a>
+    <a class="toc-item" href="#s2"><span class="toc-num">02</span><span class="toc-text">Build a Foundation of Skills</span></a>
+    <a class="toc-item" href="#s3"><span class="toc-num">03</span><span class="toc-text">Craft a Standout Resume</span></a>
+    <a class="toc-item" href="#s4"><span class="toc-num">04</span><span class="toc-text">Build Your Online Presence</span></a>
+    <a class="toc-item" href="#s5"><span class="toc-num">05</span><span class="toc-text">Find & Target Opportunities</span></a>
+    <a class="toc-item" href="#s6"><span class="toc-num">06</span><span class="toc-text">Network Strategically</span></a>
+    <a class="toc-item" href="#s7"><span class="toc-num">07</span><span class="toc-text">Apply Smart, Not Just Hard</span></a>
+    <a class="toc-item" href="#s8"><span class="toc-num">08</span><span class="toc-text">Ace the Interview</span></a>
+    <a class="toc-item" href="#s9"><span class="toc-num">09</span><span class="toc-text">Make the Most of Your Internship</span></a>
+  </div>
+</div>
+
+<!-- ═══════════ INTRO ═══════════ -->
+<div class="section">
+  <p class="prose">An internship is not just a checkbox — it is your <strong>first real step into your career</strong>. It signals to every future employer that you can function in a professional environment, contribute to real projects, and learn on the job. Whether you are in your 1st year or final year, whether you have zero projects or ten, this guide will walk you through exactly what to do and how to do it.</p>
+  <div class="tip-box tip">
+    <span class="icon">💡</span>
+    <span>Every step in this guide is designed to be <strong>immediately actionable</strong>. Treat each section as a task list — don't just read, do.</span>
+  </div>
+</div>
+
+<div class="divider"><div class="divider-dot"></div></div>
+
+<!-- ═══════════ SECTION 1 ═══════════ -->
+<div id="s1" class="section">
+  <div class="section-header">
+    <div class="section-num">01</div>
+    <div>
+      <div class="section-title">Understand What Employers Actually Want</div>
+      <div class="section-subtitle">Start with clarity, not guesswork</div>
+    </div>
+  </div>
+  <p class="prose">Before you build anything — a resume, a GitHub, a portfolio — you need to understand the lens through which companies evaluate interns. They are not looking for perfection. They are looking for <strong>potential, attitude, and basic competence</strong>.</p>
+  <div class="card-grid">
+    <div class="card accent">
+      <div class="card-icon">🧠</div>
+      <h4>Problem-Solving Ability</h4>
+      <p>Can you break down a problem and think through solutions logically? This matters more than memorising syntax.</p>
+    </div>
+    <div class="card accent">
+      <div class="card-icon">🤝</div>
+      <h4>Communication Skills</h4>
+      <p>Can you explain your work clearly? Can you ask good questions? Employers value clarity as much as technical skill.</p>
+    </div>
+    <div class="card accent">
+      <div class="card-icon">🔧</div>
+      <h4>Relevant Technical Basics</h4>
+      <p>You don't need to know everything — just enough of the domain to hit the ground running with guidance.</p>
+    </div>
+    <div class="card accent">
+      <div class="card-icon">📈</div>
+      <h4>Willingness to Learn</h4>
+      <p>Interns who ask great questions and adapt fast are far more valuable than those who pretend to know everything.</p>
+    </div>
+  </div>
+  <div class="highlight">
+    <p>Companies hire interns to build a pipeline of future employees. They want someone who fits their culture and can grow with them — not a finished product.</p>
+    <div class="source">— Key Insight</div>
+  </div>
+</div>
+
+<div class="divider"><div class="divider-dot"></div></div>
+
+<!-- ═══════════ SECTION 2 ═══════════ -->
+<div id="s2" class="section">
+  <div class="section-header">
+    <div class="section-num">02</div>
+    <div>
+      <div class="section-title">Build a Foundation of Skills</div>
+      <div class="section-subtitle">What to learn and how to learn it</div>
+    </div>
+  </div>
+  <p class="prose">You do not need to master everything. Focus on one domain, build genuine competency, and show evidence of it. Here is a breakdown by common B.Tech internship tracks:</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Track</th>
+          <th>Core Skills to Learn</th>
+          <th>Good Starting Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tag">Software Dev</td>
+          <td>Python / Java / C++, Data Structures & Algorithms, Git, SQL basics</td>
+          <td>CRUD web app, CLI tool, mini game</td>
+        </tr>
+        <tr>
+          <td class="tag">Web Dev</td>
+          <td>HTML/CSS, JavaScript, React or Vue, REST APIs, basic backend</td>
+          <td>Portfolio website, task manager, blog</td>
+        </tr>
+        <tr>
+          <td class="tag">Data / ML</td>
+          <td>Python, Pandas, NumPy, Matplotlib, Scikit-learn, SQL</td>
+          <td>EDA on a dataset, classification model, dashboard</td>
+        </tr>
+        <tr>
+          <td class="tag">Embedded / IoT</td>
+          <td>C/C++, Arduino/Raspberry Pi, basic circuit knowledge, UART/I2C</td>
+          <td>Sensor data logger, home automation mini-project</td>
+        </tr>
+        <tr>
+          <td class="tag">Cybersecurity</td>
+          <td>Networking basics, Linux CLI, Python scripting, CTF basics</td>
+          <td>Network scanner script, CTF challenges, lab writeups</td>
+        </tr>
+        <tr>
+          <td class="tag">Core Engg (ECE/Mech)</td>
+          <td>Domain theory, MATLAB/AutoCAD/SolidWorks, simulation tools</td>
+          <td>Simulation project, design file, technical report</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="prose" style="margin-top:20px;"><strong>Where to learn for free:</strong></p>
+  <div class="pill-row">
+    <span class="pill">freeCodeCamp</span>
+    <span class="pill">CS50 (Harvard)</span>
+    <span class="pill">NPTEL</span>
+    <span class="pill">Coursera (audit)</span>
+    <span class="pill">MIT OpenCourseWare</span>
+    <span class="pill">YouTube</span>
+    <span class="pill">W3Schools</span>
+    <span class="pill">Kaggle Learn</span>
+    <span class="pill">The Odin Project</span>
+    <span class="pill">GeeksforGeeks</span>
+  </div>
+
+  <div class="tip-box warn">
+    <span class="icon">⚠️</span>
+    <span><strong>Tutorial Trap Warning:</strong> Watching 40 hours of tutorials without building anything is wasted time. For every 1 hour you learn, spend 2 hours building. Projects beat certificates every time.</span>
+  </div>
+</div>
+
+<div class="divider"><div class="divider-dot"></div></div>
+
+<!-- ═══════════ SECTION 3 ═══════════ -->
+<div id="s3" class="section">
+  <div class="section-header">
+    <div class="section-num">03</div>
+    <div>
+      <div class="section-title">Craft a Standout Resume</div>
+      <div class="section-subtitle">One page. Zero fluff. Maximum impact.</div>
+    </div>
+  </div>
+  <p class="prose">Your resume is a <strong>marketing document</strong>, not a biography. Recruiters spend an average of 6–7 seconds on an initial scan. Every word must earn its place.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-badge">Rule 1</div>
+      <div class="step-content">
+        <h4>Keep it to One Page</h4>
+        <p>Unless you have 5+ years of experience, one page is the standard. Prioritise ruthlessly — if something doesn't add value, cut it.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-badge">Rule 2</div>
+      <div class="step-content">
+        <h4>Use the STAR Format for Descriptions</h4>
+        <p>Situation → Task → Action → Result. Instead of "Worked on a website", write: "Built a responsive e-commerce frontend using React that reduced page load time by 40%."</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-badge">Rule 3</div>
+      <div class="step-content">
+        <h4>Lead with Projects, Not Just Coursework</h4>
+        <p>If you lack work experience, a strong Projects section is your best asset. List 2–3 real projects with tech stack, your role, and measurable outcome.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-badge">Rule 4</div>
+      <div class="step-content">
+        <h4>Use a Clean, ATS-Friendly Template</h4>
+        <p>Applicant Tracking Systems scan resumes. Avoid tables, graphics, and fancy columns. Use plain fonts like Calibri or Georgia. Use tools like Resumake.io, Overleaf, or Canva (simple template).</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-badge">Rule 5</div>
+      <div class="step-content">
+        <h4>Tailor for Each Application</h4>
+        <p>Mirror keywords from the job description. If they say "Python and data visualisation", make sure those exact terms appear in your resume if they apply to you.</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="prose" style="margin-top:16px;"><strong>Essential Sections to Include:</strong></p>
+  <ul class="checklist">
+    <li>Contact Info — Name, email, phone, LinkedIn, GitHub/Portfolio URL</li>
+    <li>Education — College, branch, CGPA (include only if ≥ 7.0), expected graduation year</li>
+    <li>Skills — Technical skills grouped by category (Languages / Tools / Frameworks)</li>
+    <li>Projects — 2–4 projects with tech stack, brief description, and outcomes</li>
+    <li>Experience — Internships, part-time work, research (if any)</li>
+    <li>Achievements — Hackathon wins, competitive coding ranks, certifications</li>
+    <li>Extra-curricular — Leadership roles, clubs, volunteering (be selective)</li>
+  </ul>
+</div>
+
+<div class="divider"><div class="divider-dot"></div></div>
+
+<!-- ═══════════ SECTION 4 ═══════════ -->
+<div id="s4" class="section">
+  <div class="section-header">
+    <div class="section-num">04</div>
+    <div>
+      <div class="section-title">Build Your Online Presence</div>
+      <div class="section-subtitle">Be findable before you even apply</div>
+    </div>
+  </div>
+  <p class="prose">Most recruiters and hiring managers will search your name online before deciding to call you. Make sure what they find tells a compelling story.</p>
+
+  <div class="two-col">
+    <div class="card teal">
+      <div class="card-icon">💼</div>
+      <h4>LinkedIn Profile</h4>
+      <p>Use a professional photo. Write a headline beyond just "Student" — e.g., <em>"Aspiring ML Engineer | Python | TensorFlow | 2 projects"</em>. Fill the About section with a short story. Connect with 50+ people.</p>
+    </div>
+    <div class="card teal">
+      <div class="card-icon">💻</div>
+      <h4>GitHub Profile</h4>
+      <p>Pin your best 4–6 repositories. Write clear README files for each project with what it does, how to run it, and what you learned. Even 3 solid projects is enough to start.</p>
+    </div>
+    <div class="card teal">
+      <div class="card-icon">🌐</div>
+      <h4>Portfolio Website</h4>
+      <p>Optional but powerful. A simple single-page site with your projects, skills, and contact info sets you apart. Use GitHub Pages, Vercel, or Netlify — all free.</p>
+    </div>
+    <div class="card teal">
+      <div class="card-icon">🏆</div>
+      <h4>Competitive Coding Profiles</h4>
+      <p>Active LeetCode / Codeforces / HackerRank profiles signal problem-solving ability. Aim for at least 50+ solved problems on LeetCode if targeting software roles.</p>
+    </div>
+  </div>
+
+  <div class="tip-box tip">
+    <span class="icon">🔗</span>
+    <span>Your <strong>LinkedIn URL</strong> should be customised (e.g., linkedin.com/in/yourname) — not the default random string. It takes 30 seconds to change in settings and looks far more professional.</span>
+  </div>
+</div>
+
+<div class="divider"><div class="divider-dot"></div></div>
+
+<!-- ═══════════ SECTION 5 ═══════════ -->
+<div id="s5" class="section">
+  <div class="section-header">
+    <div class="section-num">05</div>
+    <div>
+      <div class="section-title">Find & Target the Right Opportunities</div>
+      <div class="section-subtitle">Know where to look and what to look for</div>
+    </div>
+  </div>
+  <p class="prose">Most students apply only to popular portals and miss the best opportunities. Cast a wider net and use a smarter strategy.</p>
+
+  <p class="prose"><strong>Best Platforms to Find Internships:</strong></p>
+  <div class="pill-row">
+    <span class="pill gold">LinkedIn Jobs</span>
+    <span class="pill gold">Internshala</span>
+    <span class="pill gold">Unstop (formerly D2C)</span>
+    <span class="pill gold">AngelList / Wellfound</span>
+    <span class="pill gold">Naukri</span>
+    <span class="pill gold">HackerEarth</span>
+    <span class="pill gold">Company Career Pages</span>
+    <span class="pill gold">GitHub Explore</span>
+    <span class="pill gold">Indeed</span>
+    <span class="pill gold">Glassdoor</span>
+    <span class="pill gold">Instahyre</span>
+    <span class="pill gold">IIT / IISc Research Portals</span>
+  </div>
+
+  <div class="steps" style="margin-top:24px;">
+    <div class="step">
+      <div class="step-badge">Strategy 1</div>
+      <div class="step-content">
+        <h4>Cold Email Startups Directly</h4>
+        <p>Startups rarely post openings but almost always need help. Find 20–30 startups in your domain on LinkedIn or AngelList, find the founder's or CTO's email, and send a short, personalised email offering to contribute. This alone works better than most job boards.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-badge">Strategy 2</div>
+      <div class="step-content">
+        <h4>Apply to Research Internships (SURGE, SRF, IUAC)</h4>
+        <p>Many students ignore research internships — which is why they're easier to get. IISER, IIT, and central university research labs offer stipended internships. Great for core branch students and those interested in grad school.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-badge">Strategy 3</div>
+      <div class="step-content">
+        <h4>Use Your College's Alumni Network</h4>
+        <p>Seniors who graduated 2–5 years ago are your single best resource. They know who's hiring, what interviews look like, and will often refer you directly. Message them on LinkedIn with respect and specificity.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-badge">Strategy 4</div>
+      <div class="step-content">
+        <h4>Participate in Hackathons & Open Source</h4>
+        <p>Winning or doing well in hackathons (Devfolio, Unstop, MLH) leads directly to internship offers. Contributing to open-source projects on GitHub also catches recruiter attention and builds your portfolio simultaneously.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"><div class="divider-dot"></div></div>
+
+<!-- ═══════════ SECTION 6 ═══════════ -->
+<div id="s6" class="section">
+  <div class="section-header">
+    <div class="section-num">06</div>
+    <div>
+      <div class="section-title">Network Strategically</div>
+      <div class="section-subtitle">Relationships open doors that applications can't</div>
+    </div>
+  </div>
+  <p class="prose">Networking is not about being fake or transactional. It is about <strong>building genuine relationships with people doing work you respect</strong>. Most internships — especially off-campus ones — come through a connection, not a cold application.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-badge">Step 1</div>
+      <div class="step-content">
+        <h4>Connect with Seniors and Alumni</h4>
+        <p>Message 2–3 seniors per week on LinkedIn. Keep it short: "Hi [Name], I'm a 2nd-year CSE student at [College]. I noticed you're at [Company] — I'm exploring internships in [domain] and would love 10 minutes of your advice."</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-badge">Step 2</div>
+      <div class="step-content">
+        <h4>Engage on LinkedIn and Twitter/X</h4>
+        <p>Comment thoughtfully on posts by people in your field. Share your own projects or learnings. A recruiter who has seen your name 3 times is far more likely to respond to your application.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-badge">Step 3</div>
+      <div class="step-content">
+        <h4>Attend Tech Events, Meetups, and Webinars</h4>
+        <p>GDG meetups, PyData, local hackathons, college tech fests — these are where you meet professionals informally. Follow up with everyone you meet on LinkedIn within 24 hours.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-badge">Step 4</div>
+      <div class="step-content">
+        <h4>Ask for Referrals (the right way)</h4>
+        <p>Only ask for a referral after you've provided value or built rapport. Never ask a stranger to refer you — instead, ask "Would you be comfortable sharing insights about the team/role?" and let referrals come naturally.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <p>The best internship leads often come from a professor, a senior you helped, or someone you met at a hackathon — not from a job portal. Start building relationships now, not when you need them.</p>
+    <div class="source">— Networking Principle</div>
+  </div>
+</div>
+
+<div class="divider"><div class="divider-dot"></div></div>
+
+<!-- ═══════════ SECTION 7 ═══════════ -->
+<div id="s7" class="section">
+  <div class="section-header">
+    <div class="section-num">07</div>
+    <div>
+      <div class="section-title">Apply Smart, Not Just Hard</div>
+      <div class="section-subtitle">Quality and consistency beat volume alone</div>
+    </div>
+  </div>
+  <p class="prose">Blasting your resume to 200 companies without customisation is a waste of time. A focused, tailored approach with consistent follow-up delivers far better results.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">🎯</div>
+      <h4>Target 10–15 Companies Per Week</h4>
+      <p>Research each company. Understand their product and tech stack. Write a personalised cover note for each. This quality approach gets more replies than mass applying.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">✉️</div>
+      <h4>Write a Sharp Cover Note</h4>
+      <p>3–5 sentences: Why this company? What specific value do you bring? What's one thing you've built that's relevant? Keep it human, not template-like.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📊</div>
+      <h4>Track Every Application</h4>
+      <p>Use a spreadsheet: Company | Role | Date Applied | Status | Follow-up Date. Following up after 7–10 days doubles your response rate.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">⏱️</div>
+      <h4>Apply Early in the Cycle</h4>
+      <p>Many internship postings close early once they get enough applications. Apply within 48–72 hours of a posting going live. Set job alerts for your target keywords.</p>
+    </div>
+  </div>
+
+  <div class="tip-box tip">
+    <span class="icon">📬</span>
+    <span><strong>The Follow-Up Formula:</strong> Wait 7–10 days after applying, then send a polite 2-line follow-up email. "Hi [Name], I applied for the [Role] internship on [Date] and remain very interested. I'd love to know if there's any additional information I can provide." — Simple, respectful, effective.</span>
+  </div>
+</div>
+
+<div class="divider"><div class="divider-dot"></div></div>
+
+<!-- ═══════════ SECTION 8 ═══════════ -->
+<div id="s8" class="section">
+  <div class="section-header">
+    <div class="section-num">08</div>
+    <div>
+      <div class="section-title">Ace the Interview</div>
+      <div class="section-subtitle">Preparation + Confidence + Honesty</div>
+    </div>
+  </div>
+  <p class="prose">Internship interviews are generally less intense than full-time interviews, but preparation is still non-negotiable. Here's what to expect and how to prepare:</p>
+
+  <div class="two-col">
+    <div>
+      <p class="prose" style="font-weight:600; font-size:14px; margin-bottom:12px;">TECHNICAL PREPARATION</p>
+      <ul class="checklist">
+        <li>Revise all projects on your resume — expect deep questions</li>
+        <li>Practice 30–50 LeetCode Easy/Medium problems (for CS roles)</li>
+        <li>Know the basics of your domain cold — OOPs, OS, DBMS, CN (CS students)</li>
+        <li>Be ready to code on a shared screen or whiteboard</li>
+        <li>Review the company's tech stack and products</li>
+      </ul>
+    </div>
+    <div>
+      <p class="prose" style="font-weight:600; font-size:14px; margin-bottom:12px;">BEHAVIOURAL PREPARATION</p>
+      <ul class="checklist">
+        <li>Prepare your "Tell me about yourself" — keep it under 90 seconds</li>
+        <li>Use STAR format for: challenges faced, teamwork, failures</li>
+        <li>Have 3 questions ready to ask the interviewer at the end</li>
+        <li>Research the company's mission, recent news, and culture</li>
+        <li>Practice out loud — do at least 3 mock interviews before the real one</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="steps" style="margin-top:20px;">
+    <div class="step">
+      <div class="step-badge">On the Day</div>
+      <div class="step-content">
+        <h4>The Day-of Checklist</h4>
+        <p>Test your internet and camera (online interviews). Dress professionally even for video calls. Keep your resume, a notepad, and a glass of water nearby. Join 5 minutes early. If you don't know the answer, say so clearly and walk through your thinking process — interviewers value honesty and reasoning over false confidence.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box warn">
+    <span class="icon">❌</span>
+    <span><strong>Never lie about your resume.</strong> If you listed a skill, you will be asked about it. If you listed a project, expect questions on every design decision. Only put things on your resume that you can speak about confidently.</span>
+  </div>
+</div>
+
+<div class="divider"><div class="divider-dot"></div></div>
+
+<!-- ═══════════ SECTION 9 ═══════════ -->
+<div id="s9" class="section">
+  <div class="section-header">
+    <div class="section-num">09</div>
+    <div>
+      <div class="section-title">Make the Most of Your Internship</div>
+      <div class="section-subtitle">Getting the offer is just the beginning</div>
+    </div>
+  </div>
+  <p class="prose">Many students treat the internship as a finish line. It is actually a <strong>starting line</strong>. How you perform here directly shapes your full-time offers, references, and professional reputation.</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"><div class="tl-circle"></div></div>
+      <div class="tl-body">
+        <div class="tl-label">Week 1–2</div>
+        <h4>Observe, Listen, and Ask Smart Questions</h4>
+        <p>Don't rush to prove yourself. Understand the team's workflow, tools, codebase, and communication style. Ask questions that show you've done your homework: "I read that the team uses X — is there documentation I should review?"</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"><div class="tl-circle"></div></div>
+      <div class="tl-body">
+        <div class="tl-label">Weeks 3–6</div>
+        <h4>Deliver Quality Work Consistently</h4>
+        <p>Meet every deadline. Document your work clearly. When you encounter a blocker, try for at least 30 minutes yourself before asking — and when you do ask, present what you've already tried. Reliability is the most underrated intern skill.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"><div class="tl-circle"></div></div>
+      <div class="tl-body">
+        <div class="tl-label">Throughout</div>
+        <h4>Build Real Relationships</h4>
+        <p>Have brief, genuine conversations with team members beyond your direct work. Attend team meetings actively. Show curiosity about other teams' work. These relationships lead to references, PPOs, and future collaborations.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"><div class="tl-circle"></div></div>
+      <div class="tl-body">
+        <div class="tl-label">Final Week</div>
+        <h4>Leave a Strong Impression</h4>
+        <p>Present your work clearly and completely. Write thorough handover notes. Ask for a LinkedIn recommendation from your manager. Request honest feedback on your performance. Thank the team personally.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"><div class="divider-dot"></div></div>
+
+<!-- ═══════════ QUICK SUMMARY ═══════════ -->
+<div class="section">
+  <div style="background:var(--ink); border-radius:6px; padding:36px 32px; color:var(--cream);">
+    <p style="font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--gold-light); margin-bottom:18px;">Quick Reference Summary</p>
+    <p style="font-family:'Playfair Display',serif; font-size:22px; font-weight:700; margin-bottom:20px; line-height:1.3;">Your 9-Step Internship Checklist</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+      <div style="display:flex; gap:10px; align-items:flex-start; font-size:13.5px; line-height:1.5;"><span style="color:var(--gold); font-family:'DM Mono',monospace; font-size:11px; min-width:22px; margin-top:2px;">01</span><span>Understand what employers value — potential over perfection</span></div>
+      <div style="display:flex; gap:10px; align-items:flex-start; font-size:13.5px; line-height:1.5;"><span style="color:var(--gold); font-family:'DM Mono',monospace; font-size:11px; min-width:22px; margin-top:2px;">02</span><span>Pick one domain and build real, demonstrable skills</span></div>
+      <div style="display:flex; gap:10px; align-items:flex-start; font-size:13.5px; line-height:1.5;"><span style="color:var(--gold); font-family:'DM Mono',monospace; font-size:11px; min-width:22px; margin-top:2px;">03</span><span>Write a clean, tailored, one-page resume with STAR descriptions</span></div>
+      <div style="display:flex; gap:10px; align-items:flex-start; font-size:13.5px; line-height:1.5;"><span style="color:var(--gold); font-family:'DM Mono',monospace; font-size:11px; min-width:22px; margin-top:2px;">04</span><span>Build a strong LinkedIn + GitHub presence</span></div>
+      <div style="display:flex; gap:10px; align-items:flex-start; font-size:13.5px; line-height:1.5;"><span style="color:var(--gold); font-family:'DM Mono',monospace; font-size:11px; min-width:22px; margin-top:2px;">05</span><span>Find opportunities beyond job boards — cold email, research, alumni</span></div>
+      <div style="display:flex; gap:10px; align-items:flex-start; font-size:13.5px; line-height:1.5;"><span style="color:var(--gold); font-family:'DM Mono',monospace; font-size:11px; min-width:22px; margin-top:2px;">06</span><span>Network consistently and genuinely, not just when you need something</span></div>
+      <div style="display:flex; gap:10px; align-items:flex-start; font-size:13.5px; line-height:1.5;"><span style="color:var(--gold); font-family:'DM Mono',monospace; font-size:11px; min-width:22px; margin-top:2px;">07</span><span>Apply smart — personalised, tracked, and followed-up</span></div>
+      <div style="display:flex; gap:10px; align-items:flex-start; font-size:13.5px; line-height:1.5;"><span style="color:var(--gold); font-family:'DM Mono',monospace; font-size:11px; min-width:22px; margin-top:2px;">08</span><span>Prepare technically and behaviourally, then be honest in the room</span></div>
+      <div style="display:flex; gap:10px; align-items:flex-start; font-size:13.5px; line-height:1.5;"><span style="color:var(--gold); font-family:'DM Mono',monospace; font-size:11px; min-width:22px; margin-top:2px;">09</span><span>Deliver quality work, build relationships, and leave a strong impression</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<div class="footer">
+  <strong>The B.Tech Internship Blueprint</strong>
+  <p>Prepared for the Mission Placement Community · Share freely with attribution · Designed to help every student, at every level</p>
+  <p style="margin-top:10px; font-size:12px; color:#555;">Remember: The best time to start was yesterday. The second best time is right now.</p>
+  <p style="margin-top:10px; font-size:11px; color:var(--gold-light);">Developed by Vellanki Santhosh</p>
+</div>
+
+<script>
+
+  // Scroll-triggered animations
+  document.addEventListener('DOMContentLoaded', function() {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Observe all animate-on-scroll elements
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Hero loads immediately
+    document.querySelector('.hero-inner').classList.add('animate');
+  });
+</script>
+
+
+</body>
+</html>
